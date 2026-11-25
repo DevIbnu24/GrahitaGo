@@ -1,39 +1,51 @@
-# Kenali Bahaya, Minta Bantuan
+# GrahitaGo — Kenali Bahaya & Nomor Darurat
 
-Media belajar berbahasa Indonesia untuk digunakan bersama anak dengan disabilitas intelektual dan anak autistik. Pengalaman belajar mencakup 12 materi, pilihan bergambar dengan kesempatan mencoba ulang, contoh meminta bantuan, serta simulasi telepon.
+Aplikasi web edukasi interaktif ramah sensorik (*sensory-friendly*) yang dirancang khusus untuk membantu anak tunagrahita dan autis mengenali 12 tanda bahaya di sekitar, melatih respons aman secara berulang tanpa stres (*errorless learning*), serta menghafal nomor darurat Indonesia dan nomor keluarga.
 
-## Coba di komputer
+## Fitur Utama
 
-Ekstrak ZIP, lalu buka `index.html`. Website juga dapat dijalankan melalui `python -m http.server 8000` dan dibuka di http://localhost:8000. Tombol dengarkan memakai sintesis suara browser dengan bahasa id-ID. Jika perangkat belum punya suara Indonesia, browser dapat memakai suara bawaannya. Teks instruksi selalu tersedia.
+1. **Belajar Bahaya (12 Topik Lengkap)**: Api, Listrik, Benda Tajam, Air/Banjir, Lantai Licin, Obat-obatan, Cairan Pembersih, Benda Panas, Tangga, Jalan Raya, Gempa Bumi, dan Jalur Evakuasi. Menggunakan ilustrasi SVG kustom, suara Bahasa Indonesia (TTS), dan Checklist Langkah Aman.
+2. **Main Pilih Aman (*Errorless Learning*)**: Kuis visual 2 pilihan dengan soal acak setiap sesi, tanpa hukuman suara keras, dan layar nilai skor 0–100.
+3. **Telepon Darurat Interaktif**: Simulator panggilan 112, 110, 113, 119, dan Nomor Keluarga yang dapat dikustomisasi, dilengkapi fitur **Panduan Cahaya** (*Guided Mode*) dan nada tombol telepon (DTMF).
+4. **Panggil Siapa?**: Permainan mencocokkan situasi bahaya langsung ke nomor darurat yang tepat.
+5. **Cerita Aksi Aman (*Social Stories*)**: 3 cerita langkah demi langkah untuk melatih rutinitas tenang saat darurat.
+6. **Kartu Darurat Saya**: Kartu pengenal darurat kontras tinggi yang dapat dibacakan suara (TTS) untuk penolong dan siap dicetak (`Cetak Kartu`).
+7. **Tenang Dulu**: Latihan pernapasan visual 4-2-4 (Tarik 4 detik, Tahan 2 detik, Hembuskan 4 detik) untuk membantu regulasi emosi.
+8. **Papan Lencana & Mode Pendamping**: 6 lencana prestasi, perlindungan anti-spam XP, serta panel orang tua/guru terkunci (tahan 1,5 detik) untuk mengatur kecepatan suara, Mode Super Tenang, efek suara, dan data Kartu Darurat.
 
-## Deploy ke Vercel
+## Struktur Folder
 
-1. Buat repositori GitHub dan unggah **isi folder ini**. Pastikan `index.html` dan `vercel.json` berada di root repo.
-2. Masuk ke Vercel, pilih **Add New → Project**, lalu impor repositori.
-3. Pilih preset **Other** jika diminta. Gunakan root repositori dan biarkan Build Command, Install Command, serta Output Directory pada pengaturan bawaan. Proyek ini berisi HTML, CSS, JavaScript, dan gambar statis.
-4. Klik **Deploy**, lalu buka tautan hasilnya dan uji tombol suara pada perangkat yang akan dipakai siswa.
+```text
+.
+├── index.html       # Halaman utama aplikasi
+├── style.css        # Gaya taktil responsif (Mobile, Tablet, Desktop, Print)
+├── app.js           # Logika aplikasi, TTS, Web Audio SFX, dan penyimpanan progres
+├── manifest.json    # Manifest PWA (bisa dipasang ke layar utama HP)
+├── vercel.json      # Konfigurasi deployment statis Vercel
+├── README.md        # Panduan proyek & deployment
+└── assets/          # 37 ilustrasi SVG kustom, hero.webp, dan favicon.svg
+```
 
-Dokumentasi: https://vercel.com/docs/git
+## Cara Deploy ke Vercel
 
-## Sebelum digunakan bersama siswa
+Proyek ini murni HTML, CSS, dan JavaScript statis (*zero build step*), sehingga bisa langsung dideploy dalam hitungan detik:
 
-- Buka **Panduan pendamping** dan pilih nomor yang sudah dikonfirmasi untuk lokasi sekolah. Pilihan disimpan pada browser setempat dan perlu diisi di setiap perangkat. Tanpa konfirmasi, simulasi hanya menggunakan tombol angka bebas.
-- Simulasi berjalan di halaman web dan tidak membuka aplikasi telepon. Angka latihan tidak dikirim atau disimpan.
-- Sesuaikan contoh gambar dengan rambu yang benar-benar dipasang di sekolah. Latih satu materi pada satu waktu, dan ajak anak menunjukkan kepada siapa ia bisa meminta bantuan.
-- Sumber nomor di Indonesia: https://layanan112.komdigi.go.id/tentang
-- Panduan langkah yang jelas: https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p04-clear-steps/
+### Opsi 1: Melalui GitHub (Direkomendasikan)
+1. Ekstrak file ZIP ini ke folder proyek Anda.
+2. Push seluruh isi folder ke repository GitHub baru.
+3. Buka [vercel.com](https://vercel.com), pilih **Add New... → Project**, lalu impor repository tersebut.
+4. Biarkan **Framework Preset** pada `Other` (otomatis terbaca dari `vercel.json`) dan klik **Deploy**.
 
-Materi dapat disesuaikan di `app.js`. Gambar berada di `assets/`.
+### Opsi 2: Melalui Vercel CLI
+```bash
+npm i -g vercel
+vercel
+```
+Ikuti instruksi di terminal, lalu jalankan `vercel --prod` untuk merilis ke produksi.
 
-## Materi
-
-- Di sekolah: bahaya listrik, lantai licin, tangga.
-- Di rumah: benda panas, benda tajam, obat, cairan pembersih.
-- Di luar rumah: menyeberang jalan dan tepi kolam atau sungai.
-- Saat darurat: jalur evakuasi, asap atau api, dan gempa di dalam ruangan.
-
-Ikon materi sehari-hari adalah ilustrasi pengenalan. Untuk mengajarkan rambu resmi, cocokkan bentuk dan posisi rambu dengan yang digunakan di sekolah. Gunakan latihan kelas ini bersama pendamping dan sesuaikan dengan prosedur evakuasi sekolah.
-
-- Gempa: https://bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf
-- Kebakaran: https://ppid.surabaya.go.id/prosedur-evakuasi-dalam-keadaan-darurat-kebakaran
-- Menyeberang: https://dishub.salatiga.go.id/wp-content/uploads/2024/07/MODUL-SI-DOL-SLAMET.pdf
+### Opsi 3: Uji Coba Lokal di Komputer
+Jalankan server lokal sederhana di folder proyek:
+```bash
+python -m http.server 8000
+```
+Lalu buka `http://localhost:8000` di browser.
